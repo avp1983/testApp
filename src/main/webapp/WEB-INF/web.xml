@@ -48,4 +48,10 @@
             <role-name>oper</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+    <security-role>
+        <role-name>oper</role-name>
+    </security-role>
 </web-app>

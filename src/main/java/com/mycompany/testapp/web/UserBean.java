@@ -7,6 +7,8 @@ package com.mycompany.testapp.web;
 
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -20,27 +22,37 @@ import javax.inject.Named;
 @SessionScoped
 public class UserBean implements Serializable, IUserBean {
 
-    
-    private String name;
-    private boolean inOperRole;
-    private boolean inUserRole;
+    private  String name;
+    private  boolean inOperRole;
+    private  boolean inUserRole;
+    private boolean guest;
+
+    /*private final String currentcontent;
+    private static final Map<String,String> NAV_RULES = new HashMap<String,String>();
+    private static final String ERRORPAGE="/WEB-INF/error.html";
+    static {
+        NAV_RULES.put("oper", "/WEB-INF/oper/scroller.xhtml");
+        NAV_RULES.put("user", "/WEB-INF/oper/scroller.xhtml");        
+    }*/
 
     /**
      * Creates a new instance of UserBean
      */
     public UserBean() {
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        Principal principal = context.getUserPrincipal();
-        name = principal.getName();
-        inOperRole = context.isUserInRole("oper");
-        inUserRole = context.isUserInRole("user");
+
+        // currentcontent = navigate(name);
     }
 
+    /*private String  navigate(String name){
+         String c = NAV_RULES.get(name);
+        if (c==null){
+            c = ERRORPAGE;            
+        }
+        return c;
+    }*/
     public String getName() {
         return name;
     }
-
-    
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -51,12 +63,30 @@ public class UserBean implements Serializable, IUserBean {
         return inOperRole;
     }
 
-   
-
     public boolean isInUserRole() {
         return inUserRole;
     }
 
-  
+    /* public String getCurrentcontent() {
+        return currentcontent;
+    }*/
+    private void checkCredentials(ExternalContext context) {
+        Principal principal = context.getUserPrincipal();
+        name = principal.getName();
+        inOperRole = context.isUserInRole("oper");
+        inUserRole = context.isUserInRole("user");
+    }
+    
+    public boolean getGuest() {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        Principal principal = context.getUserPrincipal();
+        if (principal == null) {
+            return true;
+        } else {
+            checkCredentials(context);
+        }
+
+        return false;
+    }
 
 }

@@ -1,12 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <HTML
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>#{msgs.auth_fail_title}</title>
-    </h:head>
-    <h:body>
-        <h:link  outcome="login">#{msgs.auth_fail_title}</h:link>
-    </h:body>
-</HTML>
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="content">
+            <h:form id="mainForm">
+               <h:link  outcome="login">#{msgs.auth_fail_title}</h:link>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</HTML> 
