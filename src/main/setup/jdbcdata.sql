@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `jdbcdata`.`Documents` ;
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Documents` (
   `document_id` INT NOT NULL AUTO_INCREMENT,
   `data_create` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `type` VARCHAR(45) NOT NULL,
+  `doc_type` VARCHAR(45) NOT NULL,
   `status_id` INT NOT NULL,
   PRIMARY KEY (`document_id`),
   INDEX `Index_status_id` (`status_id` ASC),
@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `jdbcdata`.`Mails` ;
 
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Mails` (
-  `mail_id` INT NOT NULL AUTO_INCREMENT,
+  `mail_id` INT NOT NULL,
   `header` VARCHAR(256) NULL,
   `body` TEXT NULL,
   `attachment` BLOB NULL,
