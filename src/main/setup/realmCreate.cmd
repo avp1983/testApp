@@ -1,0 +1,1 @@
+asadmin create-auth-realm --classname com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm --property="jaas-context=jdbcRealm:datasource-jndi=jdbc\\/securityDatasource:user-table=USERS:user-name-column=USERID:password-column=PASSWORD:group-table=USERS_GROUPS:group-name-column=GROUPID:digest-algorithm=SHA-256" jdbc-realm --passwordfile=glassfish-password.txt
