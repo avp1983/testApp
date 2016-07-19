@@ -56,7 +56,11 @@ public class UserBean implements Serializable, IUserBean {
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login";
+        guest = true;
+        inOperRole =false;
+        inUserRole=false;
+        
+        return "login?faces-redirect=true";
     }
 
     public boolean isInOperRole() {
