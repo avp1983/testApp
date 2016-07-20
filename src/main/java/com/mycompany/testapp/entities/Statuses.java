@@ -18,10 +18,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -29,7 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "statuses")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Statuses.findAll", query = "SELECT s FROM Statuses s"),
     @NamedQuery(name = "Statuses.findByStatusId", query = "SELECT s FROM Statuses s WHERE s.statusId = :statusId"),
@@ -42,13 +40,15 @@ public class Statuses implements Serializable {
     @Basic(optional = false)
     @Column(name = "status_id")
     private Integer statusId;
-    @Basic(optional = false)
-    @NotNull
+    
+    @Basic(optional = false)    
     @Size(min = 1, max = 256)
     @Column(name = "Name")
     private String name;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
     private Set<Documents> documentsSet;
+    
     @OneToMany(mappedBy = "statusId")
     private Set<StatusHystory> statusHystorySet;
 
@@ -80,7 +80,7 @@ public class Statuses implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
+   
     public Set<Documents> getDocumentsSet() {
         return documentsSet;
     }
@@ -89,7 +89,7 @@ public class Statuses implements Serializable {
         this.documentsSet = documentsSet;
     }
 
-    @XmlTransient
+    
     public Set<StatusHystory> getStatusHystorySet() {
         return statusHystorySet;
     }

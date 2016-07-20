@@ -41,9 +41,9 @@ DROP TABLE IF EXISTS `jdbcdata`.`Documents` ;
 
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Documents` (
   `document_id` INT NOT NULL AUTO_INCREMENT,
-  `data_create` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `doc_type` VARCHAR(45) NOT NULL,
-  `status_id` INT NOT NULL,
+  `data_create` DATE,
+  `doc_type` VARCHAR(45),
+  `status_id` INT,
   PRIMARY KEY (`document_id`),
   INDEX `Index_status_id` (`status_id` ASC),
   CONSTRAINT `FK_Documents_Statuses`
@@ -60,13 +60,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `jdbcdata`.`Mails` ;
 
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Mails` (
-  `mail_id` INT NOT NULL,
-  `header` VARCHAR(256)  NULL,
-  `body` TEXT NULL,
-  `attachment` BLOB NULL,
-  PRIMARY KEY (`mail_id`),
+  `document_id` INT NOT NULL,
+  `header` VARCHAR(256),
+  `body` TEXT,
+  `attachment` BLOB,
+  PRIMARY KEY (`document_id`),
   CONSTRAINT `fk_Mails_Documents`
-    FOREIGN KEY (`mail_id`)
+    FOREIGN KEY (`document_id`)
     REFERENCES `jdbcdata`.`Documents` (`document_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `jdbcdata`.`Status_hystory` ;
 
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Status_hystory` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date_change` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_change` DATETIME,
   `document_id` INT NULL,
   `status_id` INT NULL,
   PRIMARY KEY (`id`),

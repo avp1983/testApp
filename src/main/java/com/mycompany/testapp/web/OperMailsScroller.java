@@ -18,7 +18,7 @@ import javax.faces.component.html.HtmlDataTable;
  */
 @Named(value = "operMailsScroller")
 @SessionScoped
-public class OperMailsScroller implements Serializable, IScroller<Mails> {
+public class OperMailsScroller implements Serializable {
 
     /**
      * Creates a new instance of OperMailsScroller
@@ -26,73 +26,6 @@ public class OperMailsScroller implements Serializable, IScroller<Mails> {
     public OperMailsScroller() {
     }
 
-    @Override
-    public void refresh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String addItemListener() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void editItemListener() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleteItemListener() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void onBtnClickSortListener() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getFormName() {
-        return "OperMailsScroller";
-    }
-
-    
-
-    @Override
-    public HtmlDataTable getDataTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setDataTable(HtmlDataTable dataTable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Mails> getScrollerData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setScrollerData(List<Mails> scrollerData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Mails getSelectedItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setSelectedItem(Mails selectedItem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+ 
     
 }

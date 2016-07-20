@@ -7,12 +7,13 @@
     <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="content">
 
-            <h:panelGroup rendered="#{userBean.inOperRole}">
+           <!-- <h:panelGroup rendered="#{userBean.inOperRole}">
                 <ui:include  src="/oper/scroller.xhtml" />
             </h:panelGroup>
             <h:panelGroup rendered="#{userBean.inUserRole}">
                 <ui:include  src="/user/scroller.xhtml" />
-            </h:panelGroup>
+            </h:panelGroup> -->
+            <f:event type="preRenderView" listener="#{userBean.navigation}" />
 
 
         </ui:define>

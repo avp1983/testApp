@@ -15,11 +15,40 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel for="header" escape="false" value="#{msgs.mails_header}"/>
                     <div/>
-                    <p:inputText id="header" size="30" required="true" value="#{mailController.header}"
+                    <p:inputText id="header" size="30" required="true" value="#{mailController.mail.header}"
                                  requiredMessage="#{msgs.mails_required}"/>
                     <p:message for="header" display="icon" />
-                </h:panelGrid>    
-                <h:commandButton  value="#{msgs.save}"    action="#{mailController.save}"/>
+
+                    <h:outputLabel for="body" value="Текст"/>
+                    <div/>
+                    <p:inputTextarea addLine="5"    id="body"  required="true" requiredMessage="Необходимо заполнить поле" value="#{mailController.mail.body}"/>
+                    <p:message for="body" display="icon" />
+
+
+                    <h:dataTable rendered="#{mailController.action=='VIEW'}"   style="border-style:solid; border-width:1px;" 
+                                 value="#{mailController.statusesHistory}" var="status">
+                        <f:facet name="header">
+                            История изменения статусов
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                Дата
+                            </f:facet>
+                            #{status.dateChange}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Статус
+                            </f:facet>
+                            #{status.statusId.name}
+                        </h:column>
+
+                    </h:dataTable>
+
+                </h:panelGrid> 
+                <h:commandButton  value="Назад"    action="userScroller"/>
+                <h:commandButton rendered="#{mailController.action!='VIEW'}"  value="#{msgs.save}"    action="#{mailController.save}"/>
+
             </h:form>
 
 

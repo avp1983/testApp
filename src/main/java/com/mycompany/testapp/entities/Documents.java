@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -24,14 +23,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -54,19 +52,21 @@ abstract class Documents implements Serializable {
     @Basic(optional = false)
     @Column(name = "document_id")
     private Integer documentId;
-    @Basic(optional = false)
-    @NotNull
+    
+    
+    @Basic(optional = false)    
     @Column(name = "data_create")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataCreate;
-    @Basic(optional = false)
-    @NotNull
+    
+    @Basic(optional = false)   
     @Size(min = 1, max = 45)
     @Column(name = "doc_type")
     private String docType;
     
     /*@OneToOne(cascade = CascadeType.ALL, mappedBy = "documents")
     private Mails mails;*/
+    
     
     
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
@@ -129,7 +129,7 @@ abstract class Documents implements Serializable {
         this.statusId = statusId;
     }
 
-    @XmlTransient
+    
     public Set<StatusHystory> getStatusHystorySet() {
         return statusHystorySet;
     }

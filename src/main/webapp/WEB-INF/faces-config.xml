@@ -25,8 +25,17 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>addMail</from-outcome> 
-            <to-view-id>/user/addMail.xhtml</to-view-id> 
+            <to-view-id>/user/addMail.xhtml?faces-redirect=true</to-view-id> 
         </navigation-case>
+        <navigation-case>
+            <from-outcome>userScroller</from-outcome> 
+            <to-view-id>/user/scroller.xhtml?faces-redirect=true</to-view-id> 
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>operScroller</from-outcome> 
+            <to-view-id>/oper/scroller.xhtml?faces-redirect=true</to-view-id> 
+        </navigation-case>
+        
     </navigation-rule>
 
 
