@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "mails")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Mails.findAll", query = "SELECT m FROM Mails m"),
-    @NamedQuery(name = "Mails.findByMailId", query = "SELECT m FROM Mails m WHERE m.mailId = :mailId"),
+    @NamedQuery(name = "Mails.findAll", query = "SELECT m FROM Mails m"),   
     @NamedQuery(name = "Mails.findByHeader", query = "SELECT m FROM Mails m WHERE m.header = :header")})
 @DiscriminatorValue(value = "Mails")
 public class Mails extends Documents  implements Serializable {

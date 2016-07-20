@@ -9,42 +9,45 @@ import com.mycompany.testapp.ejb.MailsFacadeLocal;
 import com.mycompany.testapp.ejb.StatusesFacadeLocal;
 import com.mycompany.testapp.entities.Mails;
 import com.mycompany.testapp.entities.Statuses;
+import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 
 /**
  *
  * @author www
  */
-@Named(value = "mailController")
-@RequestScoped
-public class MailController {
 
+@Model
+public class MailController_ implements Serializable {
     private String header;
     private String body;
     @EJB
-    private StatusesFacadeLocal statusManager;
-
-    @EJB
     private MailsFacadeLocal mailsManager;
-
+    
+    @EJB
+    private StatusesFacadeLocal statusManager;
+    
     /**
      * Creates a new instance of MailController
      */
-    public MailController() {
+    public MailController_() {
     }
-
-    public String save() {
-        Statuses status = statusManager.find(1);
+    
+    public String save(){
         Mails mail = new Mails();
+        Statuses status = statusManager.find(1);
+        
+        
+        
+        status.setStatusId(1);
         mail.setHeader(header);
         mail.setBody("BODY");
         mail.setStatusId(status);
         mailsManager.create(mail);
-
-        return "/index.xhtml";
+        return  "login";
     }
+    
 
     public String getHeader() {
         return header;
@@ -61,5 +64,8 @@ public class MailController {
     public void setBody(String body) {
         this.body = body;
     }
-
+    
+    
+    
+    
 }
