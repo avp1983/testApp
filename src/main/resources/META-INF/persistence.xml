@@ -3,6 +3,9 @@
   <persistence-unit name="com.mycompany_testApp_war_1.0PU" transaction-type="JTA">
     <jta-data-source>jdbc/mainDatasource</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+      <!--property name="javax.persistence.schema-generation.database.action" value="create"/-->
+      <property name="eclipselink.logging.level" value="FINE"/>
+    </properties>
   </persistence-unit>
 </persistence>

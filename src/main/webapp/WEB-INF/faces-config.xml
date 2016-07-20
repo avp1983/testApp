@@ -23,6 +23,10 @@
             <from-outcome>login</from-outcome> 
             <to-view-id>/login.faces</to-view-id> 
         </navigation-case>
+        <navigation-case>
+            <from-outcome>addMail</from-outcome> 
+            <to-view-id>/WEB-INF/user/addMail.xhtml</to-view-id> 
+        </navigation-case>
     </navigation-rule>
 
 

@@ -15,6 +15,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema jdbcdata
 -- -----------------------------------------------------
 --CREATE SCHEMA IF NOT EXISTS `jdbcdata` DEFAULT CHARACTER SET utf8 ;
+DROP DATABASE IF EXISTS `jdbcdata`;
+CREATE DATABASE `jdbcdata`
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
 USE `jdbcdata` ;
 
 -- -----------------------------------------------------
@@ -56,7 +61,7 @@ DROP TABLE IF EXISTS `jdbcdata`.`Mails` ;
 
 CREATE TABLE IF NOT EXISTS `jdbcdata`.`Mails` (
   `mail_id` INT NOT NULL,
-  `header` VARCHAR(256) NULL,
+  `header` VARCHAR(256)  NULL,
   `body` TEXT NULL,
   `attachment` BLOB NULL,
   PRIMARY KEY (`mail_id`),
@@ -93,6 +98,8 @@ CREATE TABLE IF NOT EXISTS `jdbcdata`.`Status_hystory` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+INSERT INTO `jdbcdata`.`statuses` (Name) VALUES ("Создан"), ("Обрабатывается в банке"), ("Принят"), ("Отбакован");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

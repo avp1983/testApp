@@ -39,13 +39,35 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>
-                Action Bazaar Administrative Component
+                main page
             </web-resource-name>
             <url-pattern>/index.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>user</role-name>
             <role-name>oper</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>
+                user api
+            </web-resource-name>
+            <url-pattern>/WEB-INF/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>           
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>
+                oper api
+            </web-resource-name>
+            <url-pattern>/WEB-INF/oper/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>oper</role-name>           
         </auth-constraint>
     </security-constraint>
     <security-role>
