@@ -44,21 +44,13 @@ public class UserMailsScroller implements Serializable {
     
     public void refresh(){
          mails = mailsManager.findAll();
-         refreshView();
+         
     }
-     public static void refreshView() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Application application = context.getApplication();
-        ViewHandler viewHandler = application.getViewHandler();
-        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
-        context.setViewRoot(viewRoot);
-        context.renderResponse(); //Optional
-    }
-    
+  
     
      public void onDataCahnge(@Observes DocumentsOnChangeEvent event) {
           mails = mailsManager.findAll();
-          refreshView();
+         
           
     }
 

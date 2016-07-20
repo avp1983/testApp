@@ -30,6 +30,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "StatusHystory.findAll", query = "SELECT s FROM StatusHystory s"),
     @NamedQuery(name = "StatusHystory.findById", query = "SELECT s FROM StatusHystory s WHERE s.id = :id"),
+    @NamedQuery(name = "StatusHystory.findByDocument", query = "SELECT s FROM StatusHystory s WHERE s.documentId = :documentId"),
+    @NamedQuery(name = "StatusHystory.removeByDocId", query = "DELETE FROM StatusHystory s WHERE s.documentId = :documentId"),
     @NamedQuery(name = "StatusHystory.findByDateChange", query = "SELECT s FROM StatusHystory s WHERE s.dateChange = :dateChange")})
 public class StatusHystory implements Serializable {
 
@@ -49,7 +51,7 @@ public class StatusHystory implements Serializable {
     private Documents documentId;
     
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Statuses statusId;
 
     public StatusHystory() {

@@ -21,19 +21,28 @@
         
         <navigation-case>
             <from-outcome>login</from-outcome> 
-            <to-view-id>/login.faces</to-view-id> 
+            <redirect/>
+            <to-view-id>/login.xhtml</to-view-id> 
         </navigation-case>
         <navigation-case>
-            <from-outcome>addMail</from-outcome> 
-            <to-view-id>/user/addMail.xhtml?faces-redirect=true</to-view-id> 
+            <from-outcome>userMail</from-outcome>
+            <redirect/> 
+            <to-view-id>/user/addMail.xhtml</to-view-id> 
+        </navigation-case>
+           <navigation-case>
+            <from-outcome>operMail</from-outcome> 
+             <redirect/> 
+            <to-view-id>/oper/addMail.xhtml</to-view-id> 
         </navigation-case>
         <navigation-case>
             <from-outcome>userScroller</from-outcome> 
-            <to-view-id>/user/scroller.xhtml?faces-redirect=true</to-view-id> 
+             <redirect/> 
+            <to-view-id>/user/scroller.xhtml</to-view-id> 
         </navigation-case>
         <navigation-case>
             <from-outcome>operScroller</from-outcome> 
-            <to-view-id>/oper/scroller.xhtml?faces-redirect=true</to-view-id> 
+             <redirect/> 
+            <to-view-id>/oper/scroller.xhtml</to-view-id> 
         </navigation-case>
         
     </navigation-rule>

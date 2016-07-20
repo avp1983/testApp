@@ -9,7 +9,7 @@
 
             <h:form > 
 
-                <p:commandButton ajax="false" value="Создать документ"  action="#{mailController.add()}" />
+                <p:commandButton ajax="false" value="Создать документ"  action="#{mailController.add('userScroller','userMail')}" />
                 <p:commandButton ajax="false" value="Обновить"  action="#{userMailsScroller.refresh()}" />
                 
 
@@ -52,16 +52,16 @@
                         </f:facet>
                         <p:growl id="message" showDetail="true" />
                         <h:panelGrid columns="4">
-                            <h:commandLink value="Редактировать" action = "#{mailController.edit(mail)}"/>
-                            <p:commandLink ajax="false" value="Удалить" action = "#{mailController.delete(mail)}" update="message">
+                            <h:commandLink rendered="#{mail.statusId.statusId!=docStatus.processing}" value="Редактировать" action = "#{mailController.edit(mail, 'userScroller', 'userMail')}"/>
+                            <p:commandLink rendered="#{mail.statusId.statusId!=docStatus.processing}" ajax="false" value="Удалить" action = "#{mailController.delete(mail)}" update="message">
                                 <p:confirm header="Удаление" message="Вы уверены?" icon="ui-icon-alert" />
                             </p:commandLink> 
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
-                            <h:commandLink value="Просмотр" action = "#{mailController.view(mail)}"/>
-                            <h:commandLink value="Отправить в банк" action = "#{mailController.send(mail)}"/>
+                            <h:commandLink value="Просмотр" action = "#{mailController.view(mail, 'userScroller', 'userMail')}"/>
+                            <h:commandLink rendered="#{mail.statusId.statusId!=docStatus.processing}" value="Отправить в банк" action = "#{mailController.send(mail, 'userScroller', 'userMail')}"/>
                         </h:panelGrid>
                     </h:column>
                 </h:dataTable>

@@ -44,7 +44,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Documents.findByDocType", query = "SELECT d FROM Documents d WHERE d.docType = :docType")})
 @Inheritance(strategy= InheritanceType.JOINED)
 @DiscriminatorColumn(name="doc_type",discriminatorType = DiscriminatorType.STRING)
-abstract class Documents implements Serializable {
+public class Documents implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

@@ -69,7 +69,7 @@ public class UserBean implements Serializable, IUserBean {
         inOperRole = false;
         inUserRole = false;
 
-        return "login?faces-redirect=true";
+        return "login";
     }
 
     public boolean isInOperRole() {

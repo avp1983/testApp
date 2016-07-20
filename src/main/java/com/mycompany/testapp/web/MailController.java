@@ -6,14 +6,17 @@
 package com.mycompany.testapp.web;
 
 import com.mycompany.testapp.ejb.MailsFacadeLocal;
+import com.mycompany.testapp.ejb.StatusHystoryFacadeLocal;
 import com.mycompany.testapp.ejb.StatusesFacadeLocal;
+import com.mycompany.testapp.entities.Documents;
 import com.mycompany.testapp.entities.Mails;
 import com.mycompany.testapp.entities.StatusHystory;
 import com.mycompany.testapp.entities.Statuses;
+import com.mycompany.testapp.utils.DocStatus;
 import com.mycompany.testapp.utils.DocumentsOnChangeEvent;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -31,9 +34,10 @@ public class MailController implements Serializable {
 
     private String header;
     private String body;
-    private Set<StatusHystory> statusesHistory;
+    private List<StatusHystory> statusesHistory;
 
     private Mails mail = new Mails();
+    private String _back;
 
     enum Action {
         VIEW, ADD, EDIT, DELETE, SEND
@@ -45,6 +49,9 @@ public class MailController implements Serializable {
 
     @EJB
     private MailsFacadeLocal mailsManager;
+
+    @EJB
+    private StatusHystoryFacadeLocal hystoryManager;
 
     @Inject
     private Conversation conversation;
@@ -60,6 +67,7 @@ public class MailController implements Serializable {
     }
 
     public void delete(Mails item) {
+
         conversation.begin();
         mail = item;
         action = Action.DELETE;
@@ -67,26 +75,68 @@ public class MailController implements Serializable {
 
     }
 
-    public String view(Mails item) {
-        //conversation.begin();
+    private void setStatus(Mails item, int st) {
+        Statuses status = new Statuses();
+        status.setStatusId(st);
+        item.setStatusId(status);
+        mailsManager.edit(item);
+        hystoryManager.createHystory(item, status);
+        itemNotifier.fire(new DocumentsOnChangeEvent() {
+        });
+    }
+
+    public String send(Mails item, String back, String forward) {
+        setStatus(item, DocStatus.PROCESSING.getValue());
+
+        return back;
+    }
+
+    public String accept(Mails item, String back, String forward) {
+        setStatus(item, DocStatus.ACCEPTED.getValue());
+        return back;
+
+    }
+
+    public String deny(Mails item, String back, String forward) {
+        setStatus(item, DocStatus.DENIED.getValue());
+        return back;
+
+    }
+
+    public String view(Mails item, String back, String forward) {
+
+        conversation.begin();  //?????? 
+        this._back = back;
         mail = item;
         action = Action.VIEW;
-        statusesHistory = mail.getStatusHystorySet();
-        return "addMail";
+        statusesHistory = hystoryManager.getHystory(item.getDocumentId());
+        //????
+        return forward;
     }
 
-    public String edit(Mails item) {
+    public String back() {
+
+        conversation.end();
+        return _back;
+
+    }
+
+    public String edit(Mails item, String back, String forward) {
+
         conversation.begin();
+        this._back = back;
         mail = item;
         action = Action.EDIT;
-        return "addMail";
+        return forward;
     }
 
-    public String add() {
+    public String add(String back, String forward) {
+
         conversation.begin();
+        this._back = back;
         mail = new Mails();
         action = Action.ADD;
-        return "addMail";
+        return forward;
     }
 
     public String save() {
@@ -99,10 +149,15 @@ public class MailController implements Serializable {
             case ADD:
                 //Statuses status = statusManager.find(1); 
                 Statuses status = new Statuses();
-                status.setStatusId(1);
-                mail.setDataCreate(new Date());
+                status.setStatusId(DocStatus.CREATED.getValue());
+                Date d = new Date();
+                mail.setDataCreate(d);
                 mail.setStatusId(status);
+
                 mailsManager.create(mail);
+
+                hystoryManager.createHystory(mail, status);
+
                 break;
             case EDIT:
                 mailsManager.edit(mail);
@@ -112,6 +167,8 @@ public class MailController implements Serializable {
                 break;*/
 
             case DELETE:
+
+                hystoryManager.removeByDocId(mail.getDocumentId());
                 mailsManager.remove(mail);
                 break;
             case SEND:
@@ -121,7 +178,7 @@ public class MailController implements Serializable {
         conversation.end();
         itemNotifier.fire(new DocumentsOnChangeEvent() {
         });
-        return "userScroller";
+        return _back;
     }
 
     public String getHeader() {
@@ -156,11 +213,8 @@ public class MailController implements Serializable {
         this.action = action;
     }
 
-    public Set<StatusHystory> getStatusesHistory() {
+    public List<StatusHystory> getStatusesHistory() {
         return statusesHistory;
     }
-
-  
-    
 
 }

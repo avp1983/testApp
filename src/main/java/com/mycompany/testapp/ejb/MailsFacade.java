@@ -6,6 +6,8 @@
 package com.mycompany.testapp.ejb;
 
 import com.mycompany.testapp.entities.Mails;
+import com.mycompany.testapp.entities.Statuses;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,20 @@ public class MailsFacade extends AbstractFacade<Mails> implements MailsFacadeLoc
     public MailsFacade() {
         super(Mails.class);
     }
+
+    @Override
+    public List<Mails> findByStatus(Statuses status) {
+       return em.createQuery("SELECT m FROM Mails m WHERE m.statusId=:status", Mails.class).setParameter("status", status).getResultList();
+    }
+
+    @Override
+    public List<Mails> findByStatus(int s) {
+        Statuses status = new Statuses();
+        status.setStatusId(s);
+       return findByStatus(status);
+    }
+    
+    
+    
     
 }

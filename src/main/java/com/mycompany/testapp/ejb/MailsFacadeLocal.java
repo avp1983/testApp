@@ -6,6 +6,8 @@
 package com.mycompany.testapp.ejb;
 
 import com.mycompany.testapp.entities.Mails;
+import com.mycompany.testapp.entities.Statuses;
+import com.mycompany.testapp.utils.DocStatus;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,6 +30,10 @@ public interface MailsFacadeLocal {
 
     List<Mails> findRange(int[] range);
 
+    List<Mails> findByStatus(Statuses status);
+
+    List<Mails> findByStatus(int status);
+
     int count();
-    
+
 }
